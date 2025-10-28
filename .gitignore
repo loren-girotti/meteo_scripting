@@ -54,3 +54,7 @@ rsconnect/
 *.gb
 *.grib2
 *.gb2
+
+# IMAGENES
+*.png
+*.jpg

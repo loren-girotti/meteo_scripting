@@ -18,10 +18,6 @@ library(FNN)
 library(devtools)
 
 
-nc_altura <- nc_open("Niveles_ERA5/data_stream-oper_stepType-instant.nc")
-nc_sup <- nc_open("Superficie_ERA5/data_stream-oper_stepType-instant.nc")
-nc_pp_sup <- nc_open("Superficie_ERA5/data_stream-oper_stepType-accum.nc")
-
 LeerVariablesNetCDF <- function(archivo, variables) {
   library(ncdf4)
   
@@ -52,9 +48,9 @@ LeerVariablesNetCDF <- function(archivo, variables) {
   return(grid)
 }
 
-df_sup <- LeerVariablesNetCDF("Superficie_ERA5/data_stream-oper_stepType-instant.nc",c("msl","u10","v10"))
+df_sup <- LeerVariablesNetCDF("Superficie_ERA5/mslp_u10_v10_2020-04-30_00--2020-05-01_21.nc",c("msl","u10","v10"))
 
-df_accum_sup <- LeerVariablesNetCDF("Superficie_ERA5/data_stream-oper_stepType-accum.nc",c("tp","sshf","slhf"))
+df_accum_sup <- LeerVariablesNetCDF("Superficie_ERA5/pp_sshf_slhf_2020-04-30_00--2020-05-01_21.nc",c("tp","sshf","slhf"))
 
 # DATA FRAME SUPERFICIE ----
 # - msl = presion media a nivel del mar [hPa]
@@ -73,18 +69,21 @@ df_sup <- mutate(df_sup,"pp_total"=df_accum_sup$tp*1000,
   mutate(date = format(date, "%Y-%m-%d %H"))
 
 
-
 # DATA FRAME ALTURA ----
-df_alt <- LeerVariablesNetCDF("Niveles_ERA5/data_stream-oper_stepType-instant.nc","z")
+df_alt <- LeerVariablesNetCDF("geop_vort_w_div_1000_500_300hPa_2024-05-30-00z_21z.nc",c("z","vo"))
 df_alt <- df_alt %>%
   rename(date = valid_time) %>%
   mutate(date = as.POSIXct(date, origin = "1970-01-01", tz = "UTC")) %>%
   mutate(date = format(date, "%Y-%m-%d %H")) %>%
   mutate(z = z / 9.8)
 
-
 df_var_500 <- df_alt %>% filter(pressure_level==500)
 df_var_1000 <- df_alt %>% filter(pressure_level==1000)
+
+# DATOS DE SUPERFICIE PARA EL 30 DE MAYO
+fecha_30 <- df_alt$date
+df_sup<-df_sup %>%
+  filter(date==fecha_30)
 
 # Calculo el espesor 1000/500 hPa: ----
 espesor <- left_join(df_var_1000, df_var_500, 
@@ -116,22 +115,6 @@ media_espesor <- round(mean(espesor$espesor)/10) * 10
 #max_vort_rel <- ceiling(max(df_var_300$vo)/5) * 5
 #min_vort_rel <- floor(min(df_var_300$vo)/5) *5
 
-
-# ENMASCARO LA CORDILLERA ----
-# Para las variables de superficie y el espesor, aplico una máscara que enmascare
-# la cordillera de los Andes: 
-# Busco el vecino más cercano usando el paquete "FNN":
-nearest_neighbors <- get.knnx(arg_surface[, c("lon", "lat")],
-                              df_sup[, c("longitude", "latitude")], 
-                              k = 1)
-nearest_indices <- nearest_neighbors$nn.index
-df_sup$alt <- arg_surface$height[nearest_indices]
-
-nearest_neighbors <- get.knnx(arg_surface[, c("lon", "lat")],
-                              espesor[, c("longitude", "latitude")], 
-                              k = 1)
-nearest_indices <- nearest_neighbors$nn.index
-espesor$alt <- arg_surface$height[nearest_indices]
 
 
 # TEMA DEL MAPA ----
@@ -174,6 +157,22 @@ land <- ne_states(
 
 # Datos de superficie de Argentina:
 arg_surface <- metR::surface
+
+# ENMASCARO LA CORDILLERA ----
+# Para las variables de superficie y el espesor, aplico una máscara que enmascare
+# la cordillera de los Andes: 
+# Busco el vecino más cercano usando el paquete "FNN":
+nearest_neighbors <- get.knnx(arg_surface[, c("lon", "lat")],
+                              df_sup[, c("longitude", "latitude")], 
+                              k = 1)
+nearest_indices <- nearest_neighbors$nn.index
+df_sup$alt <- arg_surface$height[nearest_indices]
+
+nearest_neighbors <- get.knnx(arg_surface[, c("lon", "lat")],
+                              espesor[, c("longitude", "latitude")], 
+                              k = 1)
+nearest_indices <- nearest_neighbors$nn.index
+espesor$alt <- arg_surface$height[nearest_indices]
 
 
 # MAPA PRESIÓN EN SUP Y ESPESORES 1000/500 ----

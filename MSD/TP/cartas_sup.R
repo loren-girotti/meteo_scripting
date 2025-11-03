@@ -48,9 +48,8 @@ LeerVariablesNetCDF <- function(archivo, variables) {
   return(grid)
 }
 
-df_sup <- LeerVariablesNetCDF("Superficie_ERA5/mslp_u10_v10_2020-04-30_00--2020-05-01_21.nc",c("msl","u10","v10"))
+df_sup <- LeerVariablesNetCDF("Superficie_ERA5/pmsl_u10_v10_2020_04_27_00_2020_04_30_18.nc",c("msl","u10","v10"))
 
-df_accum_sup <- LeerVariablesNetCDF("Superficie_ERA5/pp_sshf_slhf_2020-04-30_00--2020-05-01_21.nc",c("tp","sshf","slhf"))
 
 # DATA FRAME SUPERFICIE ----
 # - msl = presion media a nivel del mar [hPa]
@@ -60,17 +59,14 @@ df_accum_sup <- LeerVariablesNetCDF("Superficie_ERA5/pp_sshf_slhf_2020-04-30_00-
 # - slhf = flujo de calor latente en sup [J/m**2]
 
 
-df_sup <- mutate(df_sup,"pp_total"=df_accum_sup$tp*1000,
-                 "sshf"=df_accum_sup$sshf,
-                 "slhf"=df_accum_sup$slhf,
-                 "msl"=df_sup$msl/100) %>%
+df_sup <- mutate(df_sup,"msl"=df_sup$msl/100) %>%
   rename(date = valid_time) %>%
   mutate(date = as.POSIXct(date, origin = "1970-01-01", tz = "UTC")) %>%
   mutate(date = format(date, "%Y-%m-%d %H"))
 
 
 # DATA FRAME ALTURA ----
-df_alt <- LeerVariablesNetCDF("geop_vort_w_div_1000_500_300hPa_2024-05-30-00z_21z.nc",c("z","vo"))
+df_alt <- LeerVariablesNetCDF("Niveles_ERA5/geop_vort_rel_300_500_1000hPa_2020_04_27_00_2020_04_30_18.nc",c("z","vo"))
 df_alt <- df_alt %>%
   rename(date = valid_time) %>%
   mutate(date = as.POSIXct(date, origin = "1970-01-01", tz = "UTC")) %>%
@@ -176,8 +172,9 @@ espesor$alt <- arg_surface$height[nearest_indices]
 
 
 # MAPA PRESIÓN EN SUP Y ESPESORES 1000/500 ----
-for (i in 1:length(fechas)) {
+for (i in 11:length(fechas)) {
 fecha <- fechas[i]
+
 
 # Mapa de presión al nivel medio del mar y espesores 1000/500 hPa: 
 # Filtro los data.frames en la fecha correspondiente:
@@ -185,6 +182,13 @@ df_sup_fecha <- df_sup %>%
   filter(date == fecha)
 espesor_fecha <- espesor %>%
   filter(date == fecha)
+
+pmin <- df_sup_fecha %>% 
+  filter(latitude<=-35 & latitude>=-50) %>%
+  filter(msl == min(msl, na.rm = TRUE)) %>% 
+  slice(1)
+
+
 
 p<-ggplot() +
   geom_contour_fill(data = espesor_fecha, 
@@ -226,13 +230,113 @@ p<-ggplot() +
     oob = scales::squish
   )+
   
+  # Punto del mínimo de presión
+  #geom_point(data = pmin, aes(x = longitude, y = latitude),
+  #           color = "black", fill = "yellow",
+  #           size = 4, shape = 21, stroke = 1.2) +
+  
+  # INDICAR BAJA CON LA LETRA B ROJA
+  geom_text(data = pmin, aes(x = longitude, y = latitude), 
+            label = "B", fontface = "bold", size = 8, color = "red")+
+
+  # Etiqueta con valor de presión
+  geom_label(data = pmin, 
+             aes(x = longitude, y = latitude,
+                 label = paste0(round(msl,1)," hPa")),
+             fill = "white", color = "black", size = 3,
+             nudge_y = 1.5)+
+  
   labs(title = "Presión al nivel medio del mar (contornos) y espesores 1000/500 hPa (sombreado)", 
        subtitle = fecha,
        x = "", y = "") +
   coord_sf(xlim = c(-80, -30), ylim = c(-60, -20)) +
   theme_map()
 
-nombre_mapa <- paste0("mapa_pmsl_espesor_1000_500", "_", fecha, ".png")
+nombre_mapa <- paste0("mapa_pmsl_espesor_1000_500_(minimo-marcado)", "_", fecha, ".png")
 ggsave(nombre_mapa, p, height = 8, width = 9, dpi = 500)
 graphics.off()
 }
+
+
+fecha <- fechas[8]
+# Mapa de presión al nivel medio del mar y espesores 1000/500 hPa: 
+# Filtro los data.frames en la fecha correspondiente:
+df_sup_fecha <- df_sup %>%
+  filter(date == fecha)
+espesor_fecha <- espesor %>%
+  filter(date == fecha)
+
+pmin <- df_sup_fecha %>% 
+  filter(latitude<=-35 & latitude>=-45) %>%
+  filter(longitude<=-40 & longitude>=-70) %>%
+  filter(msl == min(msl, na.rm = TRUE)) %>% 
+  slice(1)
+
+
+
+p<-ggplot() +
+  geom_contour_fill(data = espesor_fecha, 
+                    aes(longitude, latitude, z = espesor), 
+                    breaks = MakeBreaks(binwidth = 20)) +
+  geom_contour_fill(data = espesor_fecha %>% filter(alt > 2000), 
+                    aes(longitude, latitude, z = espesor), 
+                    fill = "grey90") +
+  geom_contour2(data = df_sup_fecha %>% filter(alt < 2000), 
+                aes(longitude, latitude, z = msl), 
+                breaks = MakeBreaks(binwidth = 2),
+                col = "grey35") +
+  geom_text_contour(data = df_sup_fecha %>% filter(alt < 2000), 
+                    aes(longitude, latitude, z = msl), 
+                    size = 3, skip = 0, rotate = FALSE,
+                    stroke = 0.2,
+                    breaks = MakeBreaks(binwidth = 2),
+                    label.placer = label_placer_flattest(), check_overlap = TRUE) +
+  geom_sf(data = land, color = "white", fill = NA, size = 1.2) +
+  geom_sf(data = land, color = "grey50", fill = NA, size = 0.4) +
+  scale_alpha(guide = "none") +
+  scale_fill_gradientn(
+    name = "Espesor 1000–500 hPa (m)\n\n",
+    colours = c(
+      "#40004b", # violeta oscuro - aire muy frío
+      "#542788", # violeta
+      "#8073ac", # lavanda
+      "#b2abd2", # celeste violáceo
+      "#d8daeb", # celeste claro
+      "#f7f7f7", # neutro (~5600)
+      "#fee0b6", # amarillo claro
+      "#fdb863", # naranja
+      "#e08214", # naranja oscuro
+      "#b35806", # marrón cálido
+      "#7f3b08"  # marrón rojizo - aire muy cálido
+    ),
+    limits = c(5400, 5800),
+    breaks = seq(5400, 5800, by = 20),
+    oob = scales::squish
+  )+
+  
+  # Punto del mínimo de presión
+  #geom_point(data = pmin, aes(x = longitude, y = latitude),
+  #         color = "black", fill = "yellow",
+  #         size = 4, shape = 21, stroke = 1.2) +
+  
+  # INDICAR BAJA CON LA LETRA B ROJA
+  geom_text(data = pmin, aes(x = longitude, y = latitude), 
+            label = "B", fontface = "bold", size = 8, color = "red")+
+
+  
+  # Etiqueta con valor de presión
+  geom_label(data = pmin, 
+             aes(x = longitude, y = latitude,
+                 label = paste0(round(msl,1)," hPa")),
+             fill = "white", color = "black", size = 3,
+             nudge_y = 1.5)+
+  
+  labs(title = "Presión al nivel medio del mar (contornos) y espesores 1000/500 hPa (sombreado)", 
+       subtitle = fecha,
+       x = "", y = "") +
+  coord_sf(xlim = c(-80, -30), ylim = c(-60, -20)) +
+  theme_map()
+
+nombre_mapa <- paste0("mapa_pmsl_espesor_1000_500_(minimo-marcado)", "_", fecha, ".png")
+ggsave(nombre_mapa, p, height = 8, width = 9, dpi = 500)
+graphics.off()

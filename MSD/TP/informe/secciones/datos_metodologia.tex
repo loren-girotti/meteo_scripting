@@ -1,0 +1,100 @@
+\section{Datos y Metodología}
+\label{sec:datos}
+
+Se utilizaron datos observados de la estación meteorológica de Mar del Plata
+Aero (código OMM: 87692), y dado que el fenómeno se desarrolló en gran parte sobre el océano
+Atlántico, para analizar el entorno sinóptico se utilizaron imágenes satelitales
+cada 6 horas del GOES 16 \citep{cptec_goes16}, del canal 2 (VIS), canales 8, 9 y 10 para la
+visualización del vapor de agua en la atmósfera baja, media y alta (WV) y canal
+13 para la visualización de topes nubosos (IR). 
+\par Asumimos un sistema cuasigeostrófico para estudiar los fenómenos dinámicos y
+termodinámicos que rigen en la escala sinóptica, con las siguientes ecuaciones:
+
+
+\begin{equation}
+\underbrace{\left( \nabla_p^2 + \frac{f_0^2}{\sigma} \frac{\partial^2}{\partial p^2} \right)\chi}_{\textbf{A}} 
+= \underbrace{f_0\left[ -\vec{V}_g \cdot \nabla_p (\xi_g + f) \right]}_{\textbf{B}}
+-\underbrace{\frac{f_0^2}{\sigma} \frac{\partial}{\partial p} 
+\left[ \frac{R}{p}(-\vec{V}_g \cdot \nabla_p T) \right]}_{\textbf{C}}
+-\underbrace{\frac{f_0^2}{\sigma} \frac{\partial}{\partial p} 
+\left[ \frac{R}{p} \left( \frac{1}{c_p} \frac{dQ}{dt} \right) \right]}_{\textbf{D}}
+\label{eq:qgchi}
+\end{equation}
+
+\begin{center}
+\small\textbf{Ecuación \ref{eq:qgchi}.} Ecuación cuasigeostrófica de la tendencia del geopotencial (QG–$\chi$).
+\end{center}
+
+\par Se trabajó a la ecuación con el enfoque clásico:
+\begin{enumerate}
+    \item Se asumió que $\chi$ es una función armónica, por lo tanto el término \textbf{A} es proporcional 
+    a $-\chi$
+    \item El término \textbf{B}, refiere a las advecciones horizontales de vorticidad que propagan el sistema en
+    el nivel isobárico que se aplique la ecuación. En este estudio, se utilizó el nivel isobárico de 300 hPa.
+    \item Con respecto a \textbf{C}, término responsable de profundizar o intensificar los mínimos o máximos de altura 
+    geopotencial a través de las advecciones diferenciales de temperatura entre dos niveles isobáricos, se estudió a través
+    de la relación de viento térmico y la ecuación hipsométrica comparando los espesores 
+    1000/500 hPa ($\phi_{500}-\phi_{1000}$).
+    \item El término \textbf{D} es el que responde al calor diabático entre
+    niveles, siendo de mayor importancia para este estudio aquellos intercambios
+    de calor producidos por cambios de fase y flujos superficiales de calor
+    sensible y latente.
+\end{enumerate}
+
+
+\begin{equation}
+\underbrace{
+\left( \nabla_p^2 + \frac{f_0^2}{\sigma} \frac{\partial^2}{\partial p^2} \right)
+}_{\textbf{A}}
+\omega
+= \underbrace{-\frac{f_0}{\sigma} \frac{\partial}{\partial p} \left[ -\vec{V}_g \cdot \nabla_p (\xi_g + f) \right]
+}_{\textbf{B}}
+-
+\underbrace{
+\frac{R}{\sigma p} \nabla_p^2 (-\vec{V}_g \cdot \nabla_p T)
+}_{\textbf{C}}
+-
+\underbrace{
+\frac{R}{\sigma p} \nabla_p^2 \left( \frac{1}{c_p} \frac{dQ}{dt} \right)
+}_{\textbf{D}}
+\label{eq:omega}
+\end{equation}
+
+\begin{center}
+\small\textbf{Ecuación \ref{eq:omega}.} Ecuación cuasigeostrófica del movimiento vertical en coordenadas isobáricas (QG–$\omega$).
+\end{center}
+
+\par Al igual que con la ecuación de tendencia, se enfocó el estudio de la ecuación de la siguiente manera:
+
+\begin{enumerate}
+    \item El término \textbf{A} es proporcional a $-\omega$ asumiendo que es una función armónica.
+    \item El término \textbf{B} es la advección diferencial de vorticidad. En este estudio se analizó cualitativamente
+    la diferencia entre las advecciones de vorticidad relativa en 300 hPa y superficie.
+    \item El término \textbf{C} responde a las advecciones térmicas.
+    \item Siendo \textbf{D} el término considerado para los procesos de intercambio de calor, tanto por flujos, como por
+    liberación de calor latente por condensación del vapor de agua.
+\end{enumerate}
+
+\par Se realizó un análisis de dichos términos utilizando datos del modelo de reanálisis de \citet{ecmwf_era5}, 
+con una resolución de $0.25^{\circ}\times0.25^{\circ}$ y 117 niveles verticales, con una altura máxima de 80 km.
+
+\par Con este modelo generamos el espesor 1000/500 hPa para ver la evolución del
+sistema en cuanto a las advecciones térmicas cálidas y frías, zonas de
+baroclinicidad, y masas de aire. El nivel de 300 hPa para ver las advecciones de
+vorticidad y  perturbaciones. Por otro lado, cartas de presión a nivel medio del
+mar con valores de flujo de calor latente medio y calor sensible medio para
+conocer el aporte de la componente de calor diabático en la intensificación del
+sistema.
+
+\par Se generó también un corte vertical en 41°S para hacer un seguimiento de las
+variaciones de velocidad vertical y divergencias, donde el sistema llega a su
+punto de máxima profundización.
+
+\par Para calcular si fue una ciclogénesis explosiva, se utilizó el criterio de Sanders y Gyakum
+\begin{equation}
+    \left|\frac{dp}{dt}\frac{\sin{(60^{\circ})}}{\sin{(\bar{\varphi})}}\right|\geq\frac{24\mathrm{hPa}}{24\mathrm{hs}}.
+    \label{eq:sanders}
+\end{equation}
+
+donde $\bar{\varphi}$ es la latitud media del mínimo de presión del sistema.
+

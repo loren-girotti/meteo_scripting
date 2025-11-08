@@ -1,0 +1,117 @@
+\section{Entorno Sinóptico}
+\par Desde las primeras horas del día 27 en las cartas (Figura
+\ref{fig:esp_vort_27-21z}) de espesores de 1000/500~hPa
+se puede observar la presencia de un sistema de alta presión en el NE y centro
+del territorio argentino, al mismo tiempo la formación de una vaguada invertida
+en el NOA que se extiende hasta la provincia de Bs As. El avance de una vaguada
+en altura con la interacción de la cordillera generó perturbaciones favoreciendo
+los ascensos en niveles más bajos, lo que provocó la convección para el día 27
+hacia la noche. La combinación de la vaguada invertida y del anticiclón del
+Atlántico sur permitió el ingreso de aire cálido y húmedo del norte para la
+formación de precipitaciones y tormentas.
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[b]{0.9\linewidth}
+    \centering
+    \includegraphics[width=0.70\linewidth]{../informe/figuras/mapa_pmsl_espesor_1000_500_2020-04-27 21.png}
+    \caption{Presión al nivel del mar en superficie cada 2 hPa (líneas continuas [hPa]) y espesores 1000/500 cada 20 m (sombreado [m]).}
+    \label{fig:espesores_27-21z}
+\end{subfigure}
+
+\begin{subfigure}[b]{0.9\linewidth}
+    \centering
+    \includegraphics[width=0.70\linewidth]{../informe/figuras/mapa_geop_vort_300hPa_2020-04-27 21.png}
+    \caption{Altura geopotencial en el nivel de 300hPa cada 40 m (líneas negras [m]]) y vorticidad relativa (sombreado $10^5[1/seg]$).}
+    \label{fig:geop_vort_300_27-21z}
+\end{subfigure}
+\caption{Cartas de superficie (\ref{fig:espesores_27-21z}) y altura
+(\ref{fig:geop_vort_300_27-21z}) para el día 27 de abril a las 21 UTC, generadas con el modelo ERA5.}
+\label{fig:esp_vort_27-21z}
+
+\end{figure}
+
+\par Con el correr de las horas para el dia 28 el sistema de baja presión ya se
+encontraba cerrado favorecido por los procesos dinámicos propios de la
+ciclogénesis. Advecciones frías del sur por debajo de la vaguada en altura,
+profundizaron a la misma, favoreciendo las advecciones de vorticidad y, en conescuencia, los
+ascensos en superficie generando la caída de presión y la profundización del
+sistema (se basó el análisis en los términos de las ecuaciones \ref{eq:qgchi} y
+\ref{eq:omega}). Esto aumentó las advecciones de temperatura en superficie, así
+como las advecciones diferenciales de temperatura. Comportamiento típico de la etapa
+de autodesarrollo del modelo de ciclogénesis clásica \citep{bjerknes1922life}.
+
+\par El día 29 el sistema de baja presión en superficie y la vaguada en la alta tropósfera
+se colocaron en fase, teniendo en superficie un flujo cuasi-barotrópico que
+inhibió las advecciones frías por debajo de la vaguada; a su
+vez, en altura, la vaguada presentó un centro cerrado de geopotencial, producto de la profundización previa, que
+impidió las advecciones de vorticidad que favorecen la inestabilidad y los
+ascensos en niveles inferiores. Así, se alcanzó el fin de la etapa de autodesarrollo, para dar
+comienzo a la etapa de madurez (Figura \ref{fig:esp_vort_29-6-12}).
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.9\linewidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{../informe/figuras/fig espesores 29-04-2025 1000_500 y 300hpa_06.png}
+        \caption{Isobaras cada 2 hPa y espesores en sombreado en superficie;
+        isohipsas cada 40 m y vorticidad relativa en sombreado en 300 hPa}
+        \label{fig:esp_vort_29-6}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.9\linewidth}
+        \centering
+        \includegraphics[width=0.9\linewidth]{../informe/figuras/fig espesores 29-04-2025 1000_500 y 300hpa_12.png}
+        \caption{Isobaras cada 2 hPa y espesores en sombreado en superficie;
+        isohipsas cada 40 m y vorticidad relativa en sombreado en 300 hPa}
+        \label{fig:esp_vort_29-12}
+    \end{subfigure}
+    \caption{Análisis comparativo de los sistemas en superficie y en altura para
+    el día 29/04/2020 a las 6 UTC (\ref{fig:esp_vort_29-6}) y a las 12 UTC (\ref{fig:esp_vort_29-12})}.
+    \label{fig:esp_vort_29-6-12}
+\end{figure}
+
+\par Al limitarse los mecanismos dinámicos que impulsan y determinan el
+desplazamiento y la profundización del ciclón, éstos se vieron dominados
+por las componentes de calor sensible y latente como se puede ver en la Fig 3.
+Se complementó el análisis de los flujos de calor en la región generando una imagen que muestra
+las anomalías de temperatura superfcial del mar \citep{noaa_oisst_psl} para el
+día 29/04/2020. Encontramos que el ciclón en superficie empieza a
+propagarse hacia el NE siguiendo una trayectoria anómala respecto al patrón
+típico del cinturón de los Oestes que luego de su paso por el continente, suelen tomar un
+desplazamiento hacia SE por la presencia del Anticiclón Semipermanente del Atlántico Sur. Esta
+propagación anómala se debe a los máximos flujos de calor (ecuación (\ref{eq:omega})) en
+contraposición con el modelo clásico noruego donde indica que debería empezar a
+disiparse en un caso típico de ciclones extratropicales \citep{Mendes2010_ClimatologyExtratropicalCyclones}.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{../informe/figuras/mapa_pmsl_flujos_de_calor_latente_sensible_sup_2020-04-29 18.png}
+        \caption{Isobaras [hPa] y flujos de calor sensible y latente [$W/m^2$]}
+        \label{fig:flujo_calor}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=0.85\textwidth]{../informe/figuras/TmarAnomalia29.png}
+        \caption{Anomalías de la temperatura de la superficie del mar [$^\circ C$]}
+        \label{fig:anom_sst}
+    \end{subfigure}
+    \caption{Comparación de la anomalía de la temperatura de la superficie del mar con los flujos de calor latente y sensible,
+    para el día 29/04/2020.}
+    \label{fig:calor_vs_sst}
+\end{figure}
+
+\par Siguiendo el análisis, se detectó que en las anomalías de
+temperatura en la superficie del mar, generado con datos de la NOAA ha mostrado
+anomalías positivas que se condicen con las áreas donde se observó los máximos
+flujos de calor latente y sensible, que favorecieron la convección (Ecuación (\ref{eq:omega})) y posterior condensación. Este proceso
+explica que, aún sin mecanismos dinámicos que beneficien a la profundización del
+ciclón, éste se benefició de los procesos termodinámicos, tal como menciona \citet{possia2011temporal}.
+
+
+
+
+
+
+

@@ -1,0 +1,109 @@
+\section{Resultados}
+
+Como se mencionó en la \textbf{Sección \ref{sec:datos}}, para evaluar si se trata de una ciclogénesis
+explosiva considerando el criterio de Sanders y Gyakum, utilizamos el valor de
+presión del día 28 a las 18 UTC junto con el día 29 a las 18 UTC (ver cuadro \ref{tab:criterio_Sanders}). Detectando un
+valor mínimo del centro de baja presión de 1002.2 hPa y 980.4 hPa,
+respectivamente (Figura \ref{fig:criterio_Sanders}). Donde se estableció una latitud media de aproximadamente 41°S para la ubicación
+del sistema. Cumpliendose el criterio antes mencionado (ec. \ref{eq:sanders}), un descenso de
+presión mayor a 1~hPa/hs (1.22hPa/h).
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{|l|c|c|}
+        \hline
+        Fecha & Presión [hPa] & Latitud [$^\circ$] \\ \hline
+        28/04/2020 18 UTC & 1002.2 & -40.75 \\ \hline
+        29/04/2020 18 UTC & 980.4 & -41 \\ \hline
+        Resultados & $\Delta p=-21.8$ & $\bar{\varphi}=-40.84$\\ \hline 
+    \end{tabular}
+    \caption{Datos del mínimo de presión del ciclón estudiado para realizar el cálculo correspondiente al criterio
+    de Sanders y Gyakum.}
+    \label{tab:criterio_Sanders}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{../informe/figuras/mapa_pmsl_espesor_1000_500_(minimo-marcado)_2020-04-28 18.png}
+        \caption{Posición del mínimo de presión para el día 28 a las 18 UTC}
+        \label{fig:criterio_Sanders_a}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\linewidth}
+        \centering
+        \includegraphics[width=\textwidth]{../informe/figuras/mapa_pmsl_espesor_1000_500_(minimo-marcado)_2020-04-29 18.png}
+        \caption{Posición del mínimo de presión para el día 29 a las 18 UTC}
+        \label{fig:criterio_Sanders_b}
+    \end{subfigure}
+    \caption{Presión a nivel medio del mar y espesores 1000/500 hPa para los días 28 y 29 a las 18 UTC}
+    \label{fig:criterio_Sanders}
+\end{figure}
+
+
+También se realizó la corrida de un corte vertical (Figura \ref{fig:corte_vertical}) en la latitud de 41°S para determinar el
+comportamiento de los ascensos y descensos (\ref{eq:omega}) junto con los valores de
+divergencia. Y se obtuvo que para el día 29 a las 12 UTC hubo fuertes valores de
+convergencias y divergencias con sus respectivos valores de $\omega$ que explican
+la intensificación del sistema.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../informe/figuras/corte_vertical_div_w_-41_2020-04-29 12.png}
+    \caption{Corte vertical en 41°S para el día 29 a las 12 UTC, en sombreado
+    valores de divergencias [$s^{-1}$] y en contornos $\omega$
+    [$10^5\,Pa\,s^{-1}$].}
+    \label{fig:corte_vertical}
+\end{figure}
+
+\subsection{Temporal en Mar Del Plata}
+
+\par Debido al temporal asociado a esta ciclogénesis explosiva en el Sudeste de Bs As
+se pudieron registrar daños estructurales, caídas de árboles y anegamientos en la localidad de Mar del Plata. 
+\par Para la visualización del tiempo presente observado se utilizaron los datos del
+Aeródromo de Mar del Plata. 
+\par El día 27 la máxima intensidad de viento (ver figura \ref{fig:int_viento}) fue superior a 22 kt con vientos del sector este
+(ver figura \ref{fig:dir_viento}), previo al pasaje del ciclón en
+superficie. Luego durante el día 28, el sistema atravesó la ciudad (figura (\ref{fig:criterio_Sanders_a})),
+disminuyendo la intensidad del viento debido al debilitamiento en el gradiente bárico; la dirección se hayó parcialmente
+variable con predominancia del sector Norte. Finalmente, durante el día 29 se registró un aumento en la
+intensidad del viento con un máximo secundario de 21 kt del sector oeste,
+mientras el ciclón se situaba al este de la costa bonaerense, correspondiente a la intensificación del gradiente bárico
+(figura \ref{fig:criterio_Sanders_b}). Debido a la trayectoria descripta por el ciclón, la presión a nivel medio del mar 
+presentó una rápida disminución (ver figura \ref{fig:pmsnm_mdq}), la cual
+comienza el día 27 alcanzado la mínima presion a la hora del paso del centro de
+baja presion sobre la ciudad en el día 28 y luego para el día 29 y 30 al
+retirarse el sistema hacia el este la presión se alza.
+\par Por otro lado, en la serie temporal (figura \ref{fig:pp_mdq}) de precipitación acumulada cada 6 hs se
+detecta un máximo de 40 mm para el día 28 finalizando con un acumulado de 74mm. Para el día previo y posterior el acumulado de
+precipitación es menor a 10 mm. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../informe/figuras/intensidad_viento_mdq.png}
+    \caption{Intensidad del viento a 10m [kt] medido en la estación Mar del Plata Aero}
+    \label{fig:int_viento}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../informe/figuras/dir_viento_mdq.png}
+    \caption{Dirección del viento a 10m [°] medido en la estación Mar del Plata Aero}
+    \label{fig:dir_viento}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../informe/figuras/pp_mdq.png}
+    \caption{Precipitación acumulada cada 6hs [mm] medida en la estación Mar del Plata Aero}
+    \label{fig:pp_mdq}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\linewidth]{../informe/figuras/pmsnm_mdq.png}
+    \caption{Presión reducida al nivel medio del mar [hPa] medida en la estación Mar del Plata Aero}
+    \label{fig:pmsnm_mdq}
+\end{figure}
+
+

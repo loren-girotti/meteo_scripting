@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: apalike.bst
+Database file #1: referencias.bib
+Warning--entry type for "cptec_goes16" isn't style-file defined
+--line 84 of file referencias.bib
+Warning--entry type for "noaa_oisst_psl" isn't style-file defined
+--line 125 of file referencias.bib
+You've used 16 entries,
+            1935 wiz_defined-function locations,
+            570 strings with 6757 characters,
+and the built_in function-call counts, 6217 in all, are:
+= -- 627
+> -- 228
+< -- 12
++ -- 80
+- -- 74
+* -- 523
+:= -- 1077
+add.period$ -- 49
+call.type$ -- 16
+change.case$ -- 114
+chr.to.int$ -- 16
+cite$ -- 16
+duplicate$ -- 237
+empty$ -- 441
+format.name$ -- 98
+if$ -- 1213
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 13
+newline$ -- 82
+num.names$ -- 48
+pop$ -- 94
+preamble$ -- 1
+purify$ -- 117
+quote$ -- 0
+skip$ -- 184
+stack$ -- 0
+substring$ -- 464
+swap$ -- 32
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 94
+warning$ -- 0
+while$ -- 56
+width$ -- 0
+write$ -- 207
+(There were 2 warnings)

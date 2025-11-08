@@ -58,3 +58,7 @@ rsconnect/
 # IMAGENES
 *.png
 *.jpg
+
+#pdfs
+
+*.pdf

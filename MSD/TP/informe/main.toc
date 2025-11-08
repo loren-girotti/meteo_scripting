@@ -1,0 +1,7 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introducción}{3}{section.1}%
+\contentsline {section}{\numberline {2}Datos y Metodología}{4}{section.2}%
+\contentsline {section}{\numberline {3}Entorno Sinóptico}{5}{section.3}%
+\contentsline {section}{\numberline {4}Resultados}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Temporal en Mar Del Plata}{10}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Conclusiones}{12}{section.5}%
